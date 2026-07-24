@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Monitoring & IT Asset Management Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <h1>🖥️ System Monitoring & IT Asset Management</h1>
+  <p class="author">Built by Aditya Kumar &nbsp;|&nbsp; agile.aditya.kumar@gmail.com</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+  <button class="tab-btn" data-tab="assets">IT Assets</button>
+  <button class="tab-btn" data-tab="alerts">Alerts</button>
+</nav>
+
+<!-- ===================== DASHBOARD TAB ===================== -->
+<section id="dashboard" class="tab-content active">
+
+  <div class="cards">
+    <div class="card"><h3>CPU</h3><p id="cpuVal">--%</p></div>
+    <div class="card"><h3>RAM</h3><p id="ramVal">--%</p></div>
+    <div class="card"><h3>Disk</h3><p id="diskVal">--%</p></div>
+    <div class="card"><h3>Uptime</h3><p id="uptimeVal">--</p></div>
+  </div>
+
+  <div class="cards">
+    <div class="card small"><h4>Total Assets</h4><p id="totalAssets">0</p></div>
+    <div class="card small"><h4>Active Assets</h4><p id="activeAssets">0</p></div>
+    <div class="card small"><h4>In Maintenance</h4><p id="maintAssets">0</p></div>
+    <div class="card small"><h4>Total Alerts</h4><p id="totalAlerts">0</p></div>
+  </div>
+
+  <div class="chart-box">
+    <canvas id="usageChart"></canvas>
+  </div>
+
+  <div class="net-info">
+    <span>⬆ Sent: <b id="netSent">0</b> MB</span>
+    <span>⬇ Received: <b id="netRecv">0</b> MB</span>
+  </div>
+</section>
+
+<!-- ===================== ASSETS TAB ===================== -->
+<section id="assets" class="tab-content">
+  <div class="section-header">
+    <h2>IT Asset Inventory</h2>
+    <button id="addAssetBtn" class="btn primary">+ Add Asset</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Name</th><th>Type</th><th>Owner</th><th>Status</th>
+        <th>Location</th><th>Purchase Date</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="assetsTableBody"></tbody>
+  </table>
+</section>
+
+<!-- ===================== ALERTS TAB ===================== -->
+<section id="alerts" class="tab-content">
+  <h2>Recent System Alerts</h2>
+  <ul id="alertsList" class="alert-list"></ul>
+</section>
+
+<!-- ===================== ADD/EDIT ASSET MODAL ===================== -->
+<div id="assetModal" class="modal hidden">
+  <div class="modal-content">
+    <h3 id="modalTitle">Add Asset</h3>
+    <input type="hidden" id="assetId">
+    <label>Asset Name</label>
+    <input type="text" id="assetName" placeholder="e.g. Dell Latitude 5420">
+    <label>Asset Type</label>
+    <select id="assetType">
+      <option>Laptop</option>
+      <option>Desktop</option>
+      <option>Server</option>
+      <option>Printer</option>
+      <option>Router</option>
+      <option>Monitor</option>
+      <option>Other</option>
+    </select>
+    <label>Owner</label>
+    <input type="text" id="assetOwner" placeholder="e.g. Aditya Kumar">
+    <label>Status</label>
+    <select id="assetStatus">
+      <option>Active</option>
+      <option>Inactive</option>
+      <option>Maintenance</option>
+    </select>
+    <label>Location</label>
+    <input type="text" id="assetLocation" placeholder="e.g. Bengaluru Office - Floor 2">
+    <label>Purchase Date</label>
+    <input type="date" id="assetDate">
+
+    <div class="modal-actions">
+      <button id="saveAssetBtn" class="btn primary">Save</button>
+      <button id="cancelAssetBtn" class="btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Aditya Kumar — System Monitoring & IT Asset Management Platform</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
